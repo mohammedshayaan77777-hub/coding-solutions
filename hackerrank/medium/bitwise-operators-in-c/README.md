@@ -77,41 +77,33 @@ The only line contains $2$ space-separated integers, $n$ and $k$.
 **Language:** C  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-08T17:45:56.642Z  
+**Submitted:** 2026-10-08T17:53:40.839Z  
 
 ```c
 #include <stdio.h>
-#include <string.h>
-#include <math.h>
-#include <stdlib.h>
 
 void calculate_the_maximum(int n, int k) {
-    int max_and = 0, max_or = 0, max_xor = 0;
+    int and_max = 0, or_max = 0, xor_max = 0;
 
-    for (int a = 1; a <= n; a++) {
+    for (int a = 1; a < n; a++) {
         for (int b = a + 1; b <= n; b++) {
-            int and_result = a & b;
-            int or_result  = a | b;
-            int xor_result = a ^ b;
+            int x = a & b;
+            int y = a | b;
+            int z = a ^ b;
 
-            if (and_result < k && and_result > max_and)
-                max_and = and_result;
-            if (or_result < k && or_result > max_or)
-                max_or = or_result;
-            if (xor_result < k && xor_result > max_xor)
-                max_xor = xor_result;
+            if (x < k && x > and_max) and_max = x;
+            if (y < k && y > or_max)  or_max = y;
+            if (z < k && z > xor_max) xor_max = z;
         }
     }
 
-    printf("%d\n%d\n%d\n", max_and, max_or, max_xor);
+    printf("%d\n%d\n%d\n", and_max, or_max, xor_max);
 }
 
 int main() {
     int n, k;
-
     scanf("%d %d", &n, &k);
     calculate_the_maximum(n, k);
-
     return 0;
 }
 
